@@ -1,0 +1,241 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Paper / Bone White Background */
+    --background: 40 30% 96%;
+    --foreground: 0 0% 8%;
+
+    /* Card surfaces */
+    --card: 40 25% 94%;
+    --card-foreground: 0 0% 8%;
+
+    --popover: 40 30% 96%;
+    --popover-foreground: 0 0% 8%;
+
+    /* Sunflower Yellow - Primary */
+    --primary: 51 100% 50%;
+    --primary-foreground: 0 0% 8%;
+
+    /* Pastel Pink - Secondary */
+    --secondary: 350 100% 88%;
+    --secondary-foreground: 0 0% 8%;
+
+    /* Muted - Lighter paper */
+    --muted: 40 20% 90%;
+    --muted-foreground: 0 0% 40%;
+
+    /* Purple Heart BTS - Accent */
+    --accent: 270 48% 44%;
+    --accent-foreground: 0 0% 100%;
+
+    /* Destructive */
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    /* Borders - Strong black for manga */
+    --border: 0 0% 12%;
+    --input: 0 0% 80%;
+    --ring: 51 100% 50%;
+
+    --radius: 0.25rem;
+
+    /* Custom tokens */
+    --sunflower: 51 100% 50%;
+    --sunflower-glow: 45 100% 60%;
+    --pastel-pink: 350 100% 88%;
+    --purple-heart: 270 48% 44%;
+    --purple-heart-light: 270 48% 60%;
+    --manga-black: 0 0% 8%;
+    --paper: 40 30% 96%;
+    --paper-aged: 38 35% 90%;
+
+    /* Shadows */
+    --shadow-manga: 4px 4px 0px hsl(0 0% 8%);
+    --shadow-manga-lg: 6px 6px 0px hsl(0 0% 8%);
+    --shadow-manga-yellow: 4px 4px 0px hsl(51 100% 50%);
+    --shadow-manga-pink: 4px 4px 0px hsl(350 100% 88%);
+    --shadow-manga-purple: 4px 4px 0px hsl(270 48% 44%);
+
+    /* Gradients */
+    --gradient-sunflower: linear-gradient(135deg, hsl(51 100% 50%), hsl(45 100% 60%));
+    --gradient-pink: linear-gradient(135deg, hsl(350 100% 88%), hsl(340 80% 80%));
+    --gradient-purple-bts: linear-gradient(135deg, hsl(270 48% 44%), hsl(280 60% 55%), hsl(260 50% 50%));
+    --gradient-paper: linear-gradient(180deg, hsl(40 30% 96%), hsl(38 35% 90%));
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Inter', sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Playfair Display', serif;
+  }
+
+  .font-legal {
+    font-family: 'Playfair Display', serif;
+  }
+
+  .font-handwriting {
+    font-family: 'Caveat', cursive;
+  }
+
+  .font-body {
+    font-family: 'Inter', sans-serif;
+  }
+}
+
+@layer components {
+  /* Manga panel borders */
+  .manga-panel {
+    @apply border-[3px] border-foreground relative overflow-hidden;
+    box-shadow: var(--shadow-manga);
+  }
+
+  .manga-panel-lg {
+    @apply border-4 border-foreground relative overflow-hidden;
+    box-shadow: var(--shadow-manga-lg);
+  }
+
+  /* Neobrutal containers */
+  .neobrutal {
+    @apply border-[3px] border-foreground bg-card;
+    box-shadow: var(--shadow-manga);
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+  }
+
+  .neobrutal:hover {
+    box-shadow: var(--shadow-manga-lg);
+    transform: translate(-2px, -2px);
+  }
+
+  .neobrutal-yellow {
+    @apply border-[3px] border-foreground bg-primary;
+    box-shadow: var(--shadow-manga);
+  }
+
+  .neobrutal-pink {
+    @apply border-[3px] border-foreground bg-secondary;
+    box-shadow: var(--shadow-manga);
+  }
+
+  .neobrutal-purple {
+    @apply border-[3px] border-foreground bg-accent text-accent-foreground;
+    box-shadow: var(--shadow-manga);
+  }
+
+  /* Halftone dot pattern overlay */
+  .halftone {
+    position: relative;
+  }
+
+  .halftone::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle, hsl(var(--foreground) / 0.08) 1px, transparent 1px);
+    background-size: 8px 8px;
+    pointer-events: none;
+  }
+
+  /* Paper texture */
+  .paper-texture {
+    background-image: 
+      linear-gradient(90deg, transparent 79px, hsl(var(--foreground) / 0.03) 79px, hsl(var(--foreground) / 0.03) 81px, transparent 81px),
+      linear-gradient(hsl(var(--foreground) / 0.03) 1px, transparent 1px);
+    background-size: 100px 20px;
+  }
+
+  /* Sunflower spin */
+  @keyframes spin-slow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  .animate-spin-slow {
+    animation: spin-slow 8s linear infinite;
+  }
+
+  /* Legal article number styling */
+  .article-number {
+    @apply font-legal font-bold text-lg;
+    background: var(--gradient-sunflower);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Distance line animation */
+  @keyframes dash-move {
+    to { stroke-dashoffset: -20; }
+  }
+
+  .distance-line {
+    stroke-dasharray: 8 6;
+    animation: dash-move 1s linear infinite;
+  }
+
+  /* Easter egg purple flash */
+  @keyframes purple-flash {
+    0% { background: var(--gradient-purple-bts); opacity: 0; }
+    20% { opacity: 0.9; }
+    80% { opacity: 0.9; }
+    100% { opacity: 0; }
+  }
+
+  .easter-egg-flash {
+    animation: purple-flash 2s ease-in-out forwards;
+  }
+
+  /* Photo glow on hover */
+  .manga-photo-glow {
+    transition: all 0.3s ease;
+  }
+
+  .manga-photo-glow:hover {
+    box-shadow: 0 0 20px 4px hsl(var(--sunflower) / 0.6), var(--shadow-manga);
+    transform: scale(1.02);
+  }
+
+  /* Floating music button */
+  .music-float {
+    @apply fixed bottom-6 right-6 z-50;
+    @apply border-[3px] border-foreground rounded-full p-3;
+    @apply bg-primary cursor-pointer;
+    box-shadow: var(--shadow-manga);
+    transition: all 0.2s ease;
+  }
+
+  .music-float:hover {
+    box-shadow: var(--shadow-manga-lg);
+    transform: translate(-2px, -2px);
+  }
+
+  /* Scroll indicator */
+  @keyframes bounce-down {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(8px); }
+  }
+
+  .animate-bounce-down {
+    animation: bounce-down 2s ease-in-out infinite;
+  }
+}
